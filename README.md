@@ -640,6 +640,40 @@ The project applies:
 - Containerization
 - Continuous Integration
 
+## Evidence
+
+### GitHub Actions - Continuous Integration
+
+The CI pipeline executes the complete Maven verification lifecycle, including automated tests and JaCoCo coverage.
+
+![GitHub Actions CI](docs/evidence/01-github-actions-ci.png)
+
+### Postman Automated Tests
+
+The Postman collection validates the API functionality, validation rules, security, error handling, and health endpoint.
+
+All 23 automated checks pass successfully.
+
+![Postman Tests](docs/evidence/02-postman-tests.png)
+
+### Swagger / OpenAPI
+
+The REST API contract is documented using OpenAPI and can be explored through Swagger UI.
+
+![Swagger UI](docs/evidence/03-swagger-ui.png)
+
+### Spring Boot Actuator
+
+The application exposes a health endpoint using Spring Boot Actuator.
+
+![Actuator Health](docs/evidence/04-actuator-health.png)
+
+### JaCoCo Code Coverage
+
+Automated test coverage is measured using JaCoCo as part of the Maven verification lifecycle.
+
+![JaCoCo Coverage](docs/evidence/05-jacoco-coverage.png)
+
 ## Author
 
 Arturo Martínez Sauza
