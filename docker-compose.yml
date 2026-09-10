@@ -1,0 +1,46 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: employee-mysql
+
+    environment:
+      MYSQL_DATABASE: employee_db
+      MYSQL_ROOT_PASSWORD: MiPassword123!
+      MYSQL_USER: employee_user
+      MYSQL_PASSWORD: MiPassword123!
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pMiPassword123!"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  employee-api:
+    build: .
+    container_name: employee-api
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/employee_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: employee_user
+      SPRING_DATASOURCE_PASSWORD: MiPassword123!
+
+      APP_USERNAME: admin
+      APP_PASSWORD: admin123
+
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql-data:
